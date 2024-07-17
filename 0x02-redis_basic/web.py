@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 """
-Implementing an expiring web cache and tracker
+web cache and tracker
 """
-import redis
 import requests
+import redis
 from functools import wraps
 
 store = redis.Redis()
 
 
 def count_url_access(method):
-    """
-    decorator counting many times
-    a URL is accessed 
-    """
+    """ Decorator counting how many times
+    a URL is accessed """
     @wraps(method)
     def wrapper(url):
         cached_key = "cached:" + url
